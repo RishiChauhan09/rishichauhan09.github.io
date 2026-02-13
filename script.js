@@ -143,7 +143,7 @@ const renderProjects = () => {
                             <h3 class="project-title">${project.name}</h3>
                             <p class="project-desc text-secondary">
                                 ${Array.isArray(project.description) 
-                                    ? project.description.join(' ') 
+                                    ? project.description.join('<br><br>') 
                                     : project.description
                                 }
                             </p>
