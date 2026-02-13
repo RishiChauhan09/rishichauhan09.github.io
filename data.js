@@ -37,7 +37,7 @@ const portfolioData = {
         id: 1,
         name: "City Cafe",
         description: [
-          "Game City Cafe is a casual simulation game where players manage and grow a café through upgrades, progression, and customer interactions.",
+          "<a href = 'https://rishi-chauhan-0009.itch.io/city-cafe' target='_blank'>City Cafe</a> is a casual simulation game where players manage and grow a café through upgrades, progression, and customer interactions.",
           "I developed the project in Unity using C#, handling gameplay programming, system architecture, and overall polish.",
           "Key contributions include implementing core gameplay systems such as customer flow (using state machines), upgrades, progression, and UI interactions. I focused on clean, modular code to keep systems scalable and easy to maintain.",
           "One challenge was preventing gameplay systems from becoming tightly coupled as the project grew. I addressed this by refactoring logic into modular components and using event-driven communication. I also optimized update loops to improve performance and stability.",
@@ -50,7 +50,7 @@ const portfolioData = {
         id: 2,
         name: "LinkIt",
         description: [
-          "LinkIt is a casual connect puzzle game inspired by match-3 mechanics, focused on clear rules, smooth interactions, and satisfying feedback.",
+          "<a href = 'https://rishi-chauhan-0009.itch.io/linkit' target='_blank'>LinkIt</a> is a casual connect puzzle game inspired by match-3 mechanics, focused on clear rules, smooth interactions, and satisfying feedback.",
           "I built the game in Unity using C#, handling core gameplay programming and system implementation. This included grid management, connection logic, match detection, and scoring systems.",
           "I also focused on responsiveness and polish, optimizing input handling and update loops to ensure smooth gameplay even during complex chain reactions.",
           "Implemented a unified input system supporting both mobile (touch) and PC (keyboard) controls.",
@@ -63,7 +63,7 @@ const portfolioData = {
         id: 3,
         name: "Echo Run",
         description: [
-          "Echo Run is a fast-paced maze puzzle game where the player must reach a portal within a limited number of resets.",
+          "<a href='https://rishi-chauhan-0009.itch.io/echo-run' target='_blank'>Echo Run</a> is a fast-paced maze puzzle game where the player must reach a portal within a limited number of resets.",
           "I developed the game in Unity using C#, focusing on gameplay programming and system implementation. Core systems include reset-based gameplay logic, player state management, maze navigation etc.",
           "I also implemented a unified input system supporting both mobile (touch) and PC (keyboard) controls.",
           "This project strengthened my skills in state management, performance-conscious gameplay programming, and designing systems that support speed-focused gameplay."

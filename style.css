@@ -696,3 +696,7 @@ body.light-mode .btn-secondary:hover {
 html, body{
     scrollbar-width: none;
 }
+
+a:link, a:visited, a:hover{
+    color : rgb(62, 162, 255);
+}
