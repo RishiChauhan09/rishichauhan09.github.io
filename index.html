@@ -1,53 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rishi Chauhan - Untiy Game Developer</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishi Chauhan | Indie Game Developer</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="dark-mode">
-    <!-- Fixed Header -->
-    <header class="header">
-        <div class="header-content">
-            <!-- Left: Profile -->
-            <div class="profile">
-                <div class="avatar" id="avatar"></div>
-                <div class="profile-info">
-                    <div class="profile-name" id="profile-name"></div>
-                    <div class="profile-title" id="profile-title"></div>
-                </div>
-            </div>
 
-            <!-- Center: Navigation -->
-            <nav class="nav" id="nav"></nav>
+<body>
 
-            <!-- Right: Theme Toggle -->
-            <button class="theme-toggle" id="theme-toggle">
-                <span id="theme-text">☀️ Light Mode</span>
-            </button>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="logo">Rishi<span>.</span></div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <img src="Images/MyImage.jpeg" alt="Rishi Chauhan" class="hero-img" />
+      <p class="intro">Hello, I'm</p>
+      <h1>Rishi Chauhan</h1>
+      <h2>Indie Game Developer | Gameplay Systems & Game Design</h2>
+      <p class="desc">
+        Turning simple ideas into complete, playable, commercial projects.
+        Focused on small but high-quality games with polished design and clear player experience.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn primary">View My Work</a>
+        <a href="https://github.com/RishiChauhan09" class="btn secondary" target="_blank">
+          GitHub
+        </a>
+        <a href="#contact" class="btn secondary">Get In Touch</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <h2 class="section-title">About <span>Me</span></h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm an indie game developer passionate about creating polished,
+          engaging gaming experiences. I focus on transforming simple concepts
+          into complete, playable games that prioritize player enjoyment.
+        </p>
+        <p>
+          With strong expertise in Unity and C#, I specialize in gameplay systems
+          and game design. Clean structure, clarity, and feedback matter more
+          than flashy complexity.
+        </p>
+        <p>
+          Every project is an opportunity to build something meaningful,
+          playable, and technically solid.
+        </p>
+      </div>
+
+      <div class="education-card">
+        <h3>Education</h3>
+        <p class="degree">B.Sc. Information Technology</p>
+        <p>Usha Pravin Gandhi College</p>
+        <p class="meta">Graduation: 2026</p>
+        <p class="meta">Mumbai, India</p>
+
+        <div class="stats">
+          <div>
+            <h4>2+</h4>
+            <span>Published Games</span>
+          </div>
+          <div>
+            <h4>100%</h4>
+            <span>Passion Driven</span>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- About Section -->
-        <section id="about" class="section active">
-            <div class="section-container"></div>
-        </section>
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <h2 class="section-title">Skills</h2>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="section-container projects-container"></div>
-        </section>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="icon">🎮</span>
+        <h3>Game Development</h3>
+        <p>Complete game creation from concept to release.</p>
+      </div>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="section-container"></div>
-        </section>
-    </main>
+      <div class="skill-card">
+        <span class="icon">💻</span>
+        <h3>Game Programming</h3>
+        <p>Clean, efficient C# gameplay systems in Unity.</p>
+      </div>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+      <div class="skill-card">
+        <span class="icon">🧠</span>
+        <h3>Game Design</h3>
+        <p>Gameplay loops, progression, and level design.</p>
+      </div>
+
+      <div class="skill-card">
+        <span class="icon">🧩</span>
+        <h3>Unity Engine</h3>
+        <p>2D / 3D, physics, animation, and UI systems.</p>
+      </div>
+
+      <div class="skill-card">
+        <span class="icon">⚙️</span>
+        <h3>Gameplay Systems</h3>
+        <p>Modular systems for combat, AI, and interaction.</p>
+      </div>
+
+      <div class="skill-card">
+        <span class="icon">✨</span>
+        <h3>Polish & UX</h3>
+        <p>Juice, feedback, and satisfying player feel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+
+    <p class="all-projects-link">
+      <a href="https://rishi-chauhan-0009.itch.io/" target="_blank">
+        View all my projects →
+      </a>
+    </p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="Images/CityCafeCoverImage.png" class="project-img" />
+        <h3>City Café</h3>
+        <p>
+          Cozy café management game with cooking, missions,
+          skins, and café progression.
+        </p>
+        <a href="https://rishi-chauhan-0009.itch.io/city-cafe" target="_blank">
+          Play City Café →
+        </a>
+      </div>
+
+      <div class="project-card">
+        <img src="Images/EchoRunCoverImage.png" class="project-img" />
+        <h3>Echo Run</h3>
+        <p>
+          Fast-paced puzzle game focused on timing, portals,
+          obstacles, and smart resets.
+        </p>
+        <a href="https://rishi-chauhan-0009.itch.io/echo-run" target="_blank">
+          Play Echo Run →
+        </a>
+      </div>
+
+      <div class="project-card">
+        <img src="Images/LinkItCoverImage.png" class="project-img" />
+        <h3>LinkIt</h3>
+        <p>
+          Fast-paced match-3-style game focused on quick
+          thinking, shape linking, and combo building under time pressure.
+        </p>
+        <a href="https://rishi-chauhan-0009.itch.io/linkit" target="_blank">
+          Play LinkIt →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+
+    <div class="contact-box">
+      <div class="contact-item">
+        <span>📧</span>
+        <a href="mailto:rishi05chauhan@gmail.com">rishi05chauhan@gmail.com</a>
+      </div>
+
+      <div class="contact-item">
+        <span>🔗</span>
+        <a href="https://www.linkedin.com/in/rishi-chauhan-a5732635b/" target="_blank">
+          linkedin.com/in/rishi-chauhan
+        </a>
+      </div>
+    </div>
+  </section>
+
 </body>
+
 </html>
