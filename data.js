@@ -6,6 +6,7 @@ const portfolioData = {
   },
   navigation: [
     { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
     { id: "projects", label: "Projects" },
     { id: "contact", label: "Contact" }
   ],
@@ -25,6 +26,25 @@ const portfolioData = {
     resumePath: "OtherFiles/RishiResume.pdf",
     githubButton: "View GitHub",
     githubUrl: "https://github.com/RishiChauhan09"
+  },
+  skills: {
+    badge: "Expertise",
+    heading: {
+      line1: "Skills &",
+      line2: "Capabilities"
+    },
+    items: [
+      "C# and Other Languages",
+      "Unity Game Development",
+      "Object Oriented Programming",
+      "Finite State Machine",
+      "NPC Behaviour",
+      "Debugging",
+      "Optimization",
+      "SOLID Principles",
+      "Event-Driven Programming",
+      "Multithreading / Async Programming"
+    ]
   },
   projects: {
     badge: "Portfolio",

@@ -115,6 +115,24 @@ const renderAbout = () => {
     `;
 };
 
+// Render Skills section
+const renderSkills = () => {
+    const { skills } = portfolioData;
+    const container = document.querySelector('#skills .section-container');
+    
+    container.innerHTML = `
+        <span class="badge">${skills.badge}</span>
+        <h2 class="section-heading">
+            ${skills.heading.line1} <span class="text-accent">${skills.heading.line2}</span>
+        </h2>
+        <ul class="skills-list">
+            ${skills.items.map(skill => `
+                <li class="skill-item">${skill}</li>
+            `).join('')}
+        </ul>
+    `;
+};
+
 // Render Projects section
 const renderProjects = () => {
     const { projects } = portfolioData;
@@ -203,6 +221,7 @@ const init = () => {
     renderProfile();
     renderNavigation();
     renderAbout();
+    renderSkills();
     renderProjects();
     renderContact();
 };
