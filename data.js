@@ -18,9 +18,8 @@ const portfolioData = {
     },
     image: "OtherFiles/MyImage.png",
     paragraphs: [
-      "I'm a Unity game developer focused on building complete, playable games with solid mechanics and clear player feedback.",
-      "I'm a fresher who has created multiple small games from concept to completion, working primarily in Unity with C#. I care about clean structure, readable code, and gameplay systems that feel good to play.",
-      "I'm always open to discussing game development, Unity projects, and new opportunities to grow as a developer."
+      "I'm a Unity Game Developer specializing in C# and gameplay programming, with hands-on experience developing and polishing multiple games from concept to completion. One of my games, Arrow Flux, is published on the Google Play Store.",
+      "I focus on building clean, scalable gameplay systems, optimizing performance, and creating polished player experiences. I'm passionate about game development and continuously improving my skills through new projects and challenges."
     ],
     resumeButton: "Download Resume",
     resumePath: "OtherFiles/RishiResume.pdf",
@@ -34,16 +33,17 @@ const portfolioData = {
       line2: "Capabilities"
     },
     items: [
-      "C# and Other Languages",
-      "Unity Game Development",
+      "Unity",
+      "C#, Java, C++, C, Python",
       "Object Oriented Programming",
-      "Finite State Machine",
-      "NPC Behaviour",
-      "Debugging",
-      "Optimization",
       "SOLID Principles",
-      "Event-Driven Programming",
-      "Multithreading / Async Programming"
+      "Design Patterns (FSMs, Observer, Builder)",
+      "Performance Optimization",
+      "Porfiling",
+      "Frame Debugger",
+      "Unity Editor Tools",
+      "UI Toolkit",
+      "And other 3rd party packages (Unity IAP, Firebase, AdMob, Google Play Games Services)"
     ]
   },
   projects: {
@@ -55,6 +55,19 @@ const portfolioData = {
     items: [
       {
         id: 1,
+        name: "Arrow Flux",
+        description: [
+          "<a href='https://play.google.com/store/apps/details?id=com.gappedgames.arrowescape' target='_blank'>Arrow Flux</a> is a casual puzzle game where players strategically clear directional arrows from a grid while solving progressively challenging levels.",
+          "I developed the project in Unity using C#, handling gameplay programming, system architecture, level systems, UI, and overall game polish.",
+          "Key contributions include implementing the core grid and arrow systems, level progression, power-ups, animations, UI interactions, and custom Unity Editor tools for creating and managing levels efficiently. (Around 300+ Levels with just one click)",
+          "One challenge was keeping the level and gameplay systems scalable as the number of levels increased. I addressed this by building modular systems and editor tooling that simplified level creation and reduced repetitive development work.",
+          "This project strengthened my skills in Unity gameplay programming, editor tooling, modular architecture, mobile optimization, grid system logic, and shipping a complete commercial game."
+        ],
+        videoUrl: "https://www.youtube.com/embed/__HjNVukScE",
+        tags: ["Unity", "2D", "Grid System", "Hyper Casual"]
+      },
+      {
+        id: 2,
         name: "City Cafe",
         description: [
           "<a href = 'https://rishi-chauhan-0009.itch.io/city-cafe' target='_blank'>City Cafe</a> is a casual simulation game where players manage and grow a café through upgrades, progression, and customer interactions.",
@@ -67,7 +80,7 @@ const portfolioData = {
         tags: ["Unity", "3D", "Simulation", "Cozy"]
       },
       {
-        id: 2,
+        id: 3,
         name: "LinkIt",
         description: [
           "<a href = 'https://rishi-chauhan-0009.itch.io/linkit' target='_blank'>LinkIt</a> is a casual connect puzzle game inspired by match-3 mechanics, focused on clear rules, smooth interactions, and satisfying feedback.",
@@ -80,7 +93,7 @@ const portfolioData = {
         tags: ["Unity", "2D", "Grid System", "Match 3 Type"]
       },
       {
-        id: 3,
+        id: 4,
         name: "Echo Run",
         description: [
           "<a href='https://rishi-chauhan-0009.itch.io/echo-run' target='_blank'>Echo Run</a> is a fast-paced maze puzzle game where the player must reach a portal within a limited number of resets.",
@@ -104,8 +117,8 @@ const portfolioData = {
       {
         type: "email",
         label: "Email",
-        value: "rishi05chauhan@gmail.com",
-        href: "mailto:rishi05chauhan@gmail.com"
+        value: "rishi05chauhanw@gmail.com",
+        href: "mailto:rishi05chauhanw@gmail.com"
       },
       {
         type: "linkedin",
