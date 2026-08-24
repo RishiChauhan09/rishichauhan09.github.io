@@ -580,6 +580,204 @@ body.light-mode .skill-item:hover {
     color: rgb(124, 58, 237);
 }
 
+/* Experience Section */
+.section#experience.active {
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.experience-card {
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 300ms;
+}
+
+/* left accent bar — same gradient as skill-item */
+.experience-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, rgb(124, 58, 237), rgb(79, 70, 229));
+    border-radius: 0.75rem 0 0 0.75rem;
+    transform: scaleY(0);
+    transition: transform 300ms;
+}
+
+.experience-card:hover::before {
+    transform: scaleY(1);
+}
+
+.experience-card:hover {
+    transform: translateX(8px);
+}
+
+/* Dark mode card */
+body.dark-mode .experience-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .experience-card:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgb(139, 92, 246);
+}
+
+/* Light mode card */
+body.light-mode .experience-card {
+    background: white;
+    border: 1px solid rgb(243, 244, 246);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .experience-card:hover {
+    background: rgb(245, 243, 255);
+    border-color: rgb(139, 92, 246);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+}
+
+/* Header row: company+role left, period|location right */
+.experience-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.experience-header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.experience-company {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+body.dark-mode .experience-company {
+    color: white;
+}
+
+body.light-mode .experience-company {
+    color: rgb(17, 24, 39);
+}
+
+.experience-role {
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+body.dark-mode .experience-role {
+    color: rgb(167, 139, 250);
+}
+
+body.light-mode .experience-role {
+    color: rgb(109, 40, 217);
+}
+
+.experience-meta {
+    font-size: 0.825rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+body.dark-mode .experience-meta {
+    color: rgb(156, 163, 175);
+}
+
+body.light-mode .experience-meta {
+    color: rgb(107, 114, 128);
+}
+
+/* Bullet points */
+.experience-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-left: 0.25rem;
+}
+
+.experience-point {
+    font-size: 0.925rem;
+    line-height: 1.7;
+    padding-left: 1.25rem;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-6px);
+    animation: expPointIn 0.35s ease-out forwards;
+}
+
+/* stagger each bullet */
+.experience-point:nth-child(1) { animation-delay: 0.05s; }
+.experience-point:nth-child(2) { animation-delay: 0.15s; }
+.experience-point:nth-child(3) { animation-delay: 0.25s; }
+.experience-point:nth-child(4) { animation-delay: 0.35s; }
+.experience-point:nth-child(5) { animation-delay: 0.45s; }
+
+@keyframes expPointIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.experience-point::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.75rem;
+    line-height: 1.9;
+}
+
+body.dark-mode .experience-point {
+    color: rgb(209, 213, 219);
+}
+
+body.dark-mode .experience-point::before {
+    color: rgb(167, 139, 250);
+}
+
+body.light-mode .experience-point {
+    color: rgb(55, 65, 81);
+}
+
+body.light-mode .experience-point::before {
+    color: rgb(124, 58, 237);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .experience-header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .experience-meta {
+        align-self: flex-start;
+    }
+}
+
 /* Projects Section */
 .projects-list {
     display: flex;

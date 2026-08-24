@@ -172,6 +172,39 @@ const renderProjects = () => {
     `;
 };
 
+// Render Experience section
+const renderExperience = () => {
+    const { experience } = portfolioData;
+    const container = document.querySelector('#experience .section-container');
+
+    container.innerHTML = `
+        <span class="badge">${experience.badge}</span>
+        <h2 class="section-heading">
+            ${experience.heading.line1} <span class="text-accent">${experience.heading.line2}</span>
+        </h2>
+        <div class="experience-list">
+            ${experience.items.map(item => `
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-header-left">
+                            <h3 class="experience-company">${item.company}</h3>
+                            <span class="experience-role">— <em>${item.role}</em></span>
+                        </div>
+                        <div class="experience-meta">
+                            ${item.period} | ${item.location}
+                        </div>
+                    </div>
+                    <ul class="experience-points">
+                        ${item.points.map(point => `
+                            <li class="experience-point">${point}</li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('')}
+        </div>
+    `;
+};
+
 // Render Contact section
 const renderContact = () => {
     const { contact } = portfolioData;
@@ -222,6 +255,7 @@ const init = () => {
     renderNavigation();
     renderAbout();
     renderSkills();
+    renderExperience();
     renderProjects();
     renderContact();
 };

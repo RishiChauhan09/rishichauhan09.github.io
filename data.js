@@ -7,6 +7,7 @@ const portfolioData = {
   navigation: [
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
     { id: "contact", label: "Contact" }
   ],
@@ -103,6 +104,26 @@ const portfolioData = {
         ],
         videoUrl: "https://www.youtube.com/embed/r-APjz4nU2M",
         tags: ["Unity", "2D", "Puzzle", "Fast Paced"]
+      }
+    ]
+  },
+  experience: {
+    badge: "Work Experience",
+    heading: {
+      line1: "Professional",
+      line2: "Experience"
+    },
+    items: [
+      {
+        company: "Nilee Games",
+        role: "Intern Unity Developer",
+        period: "04/2026 - Present",
+        location: "Mumbai",
+        points: [
+          "Developed and maintained motion-sensing games using Unity and C#, collaborating with Python developers for system integration.",
+          "Performed game polishing and optimization to improve performance, stability, and overall player experience.",
+          "Collaborated with designers and developers to implement features, resolve issues, and deliver project requirements."
+        ]
       }
     ]
   },
