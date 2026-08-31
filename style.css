@@ -339,21 +339,19 @@ body.light-mode .profile-title {
 /* Main Content */
 .main-content {
     padding-top: 5rem;
-    min-height: 100vh;
 }
 
+/* All sections always visible */
 .section {
-    display: none;
-    padding: 3rem;
-}
-
-.section.active {
     display: flex;
+    padding: 5rem 3rem;
+    align-items: center;
+    justify-content: center;
 }
 
-.section#projects.active {
+.section#projects {
     display: block;
-    min-height: auto;
+    padding: 5rem 3rem;
 }
 
 .section-container {
@@ -362,17 +360,22 @@ body.light-mode .profile-title {
     margin: 0 auto;
 }
 
-.section#about.active,
-.section#skills.active,
-.section#contact.active {
-    min-height: calc(100vh - 5rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .section-container.projects-container {
     max-width: 56rem;
+    margin: 0 auto;
+}
+
+/* Divider between sections */
+.section + .section {
+    border-top: 1px solid;
+}
+
+body.dark-mode .section + .section {
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
+body.light-mode .section + .section {
+    border-color: rgb(229, 231, 235);
 }
 
 /* Animations */
@@ -581,13 +584,6 @@ body.light-mode .skill-item:hover {
 }
 
 /* Experience Section */
-.section#experience.active {
-    min-height: calc(100vh - 5rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .experience-list {
     display: flex;
     flex-direction: column;
@@ -782,21 +778,69 @@ body.light-mode .experience-point::before {
 .projects-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
     margin-top: 2rem;
 }
 
+/*
+  Grid layout:
+  [text col]  [video col]
+  [overflow text spans both cols if present]
+
+  Reversed:
+  [video col]  [text col]
+  [overflow text spans both cols if present]
+*/
 .project-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem 2rem;
     border-radius: 1rem;
-    overflow: hidden;
+    padding: 1.75rem;
     transition: all 300ms;
 }
 
-.project-card:hover {
-    transform: scale(1.01);
+/* Odd card: text top-left, video top-right */
+.project-card .project-text {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
 }
 
+.project-card .project-video {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+}
+
+/* Overflow text spans full width below */
+.project-desc--overflow {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: none; /* shown via JS measurement — handled by CSS alone below */
+}
+
+/* Even card: video top-left, text top-right */
+.project-card--reverse .project-text {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.project-card--reverse .project-video {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.project-card--reverse .project-desc--overflow {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+/* Video iframe */
 .project-video {
+    border-radius: 0.75rem;
+    overflow: hidden;
     aspect-ratio: 16 / 9;
     background: #000;
 }
@@ -805,12 +849,10 @@ body.light-mode .experience-point::before {
     width: 100%;
     height: 100%;
     border: none;
+    display: block;
 }
 
-.project-body {
-    padding: 1.5rem;
-}
-
+/* Text area */
 .project-tags {
     display: flex;
     flex-wrap: wrap;
@@ -829,12 +871,89 @@ body.light-mode .experience-point::before {
 .project-title {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .project-desc {
     font-size: 0.875rem;
     line-height: 1.75;
+}
+
+.project-desc p {
+    margin-bottom: 0.75rem;
+}
+
+.project-desc p:last-child {
+    margin-bottom: 0;
+}
+
+/*
+  Smart overflow: the --short version sits in the text column.
+  The --overflow version sits below spanning full width.
+  We use a max-height trick: --short shows only as much as fits
+  next to the video, --overflow shows the rest.
+
+  Simpler approach: always show ALL text in --short column,
+  hide --overflow. This keeps full text beside the video and
+  lets it naturally push the card taller. Clean and simple.
+*/
+.project-desc--short {
+    display: block;
+}
+
+.project-desc--overflow {
+    display: none;
+}
+
+/* Dark mode */
+body.dark-mode .project-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+body.dark-mode .project-card:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+body.dark-mode .tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgb(209, 213, 219);
+}
+
+/* Light mode */
+body.light-mode .project-card {
+    background-color: white;
+    border: 1px solid rgb(243, 244, 246);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: rgb(196, 181, 253);
+}
+
+body.light-mode .tag {
+    background-color: rgb(243, 244, 246);
+    color: rgb(75, 85, 99);
+}
+
+/* Responsive — stack vertically on small screens */
+@media (max-width: 768px) {
+    .project-card,
+    .project-card--reverse {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .project-card .project-text,
+    .project-card--reverse .project-text,
+    .project-card .project-video,
+    .project-card--reverse .project-video,
+    .project-desc--overflow {
+        grid-column: 1;
+        grid-row: auto;
+    }
 }
 
 /* Contact Section */
@@ -958,8 +1077,9 @@ body.light-mode .experience-point::before {
     }
 }
 
-html, body{
+html, body {
     scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 
 a:link, a:visited, a:hover{

@@ -48,31 +48,32 @@ const renderNavigation = () => {
         button.className = `nav-btn ${index === 0 ? 'active' : ''}`;
         button.textContent = item.label;
         button.setAttribute('data-section', item.id);
-        button.addEventListener('click', () => switchSection(item.id));
+        button.addEventListener('click', () => {
+            document.getElementById(item.id).scrollIntoView({ behavior: 'smooth' });
+        });
         navElement.appendChild(button);
     });
 };
 
-// Switch section
-const switchSection = (sectionId) => {
-    // Update nav buttons
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        if (btn.getAttribute('data-section') === sectionId) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+// Highlight nav button matching the section most in view
+const initScrollSpy = () => {
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-section') === id);
+                });
+            }
+        });
+    }, {
+        rootMargin: '-40% 0px -55% 0px',
+        threshold: 0
     });
-    
-    // Update sections
-    document.querySelectorAll('.section').forEach(section => {
-        if (section.id === sectionId) {
-            section.classList.add('active');
-            section.querySelector('.section-container').classList.add('animate-fadeIn');
-        } else {
-            section.classList.remove('active');
-        }
-    });
+
+    sections.forEach(section => observer.observe(section));
 };
 
 // Render About section
@@ -137,39 +138,81 @@ const renderSkills = () => {
 const renderProjects = () => {
     const { projects } = portfolioData;
     const container = document.querySelector('#projects .section-container');
-    
+
     container.innerHTML = `
         <span class="badge">${projects.badge}</span>
         <h2 class="section-heading">
             ${projects.heading.line1} <span class="text-accent">${projects.heading.line2}</span>
         </h2>
         <div class="projects-list">
-            ${projects.items.map(project => `
-                <div class="project-card">
+            ${projects.items.map((project, index) => {
+                const isEven = index % 2 === 1;
+                const paragraphs = Array.isArray(project.description)
+                    ? project.description
+                    : [project.description];
+
+                // First paragraph always goes in the text column alongside the video.
+                // Remaining paragraphs start in the text column too; JS will move
+                // excess ones to the overflow row after render if they overflow the video height.
+                const paraHtml = paragraphs.map((p, i) =>
+                    `<p class="proj-para" data-idx="${i}">${p}</p>`
+                ).join('');
+
+                return `
+                <div class="project-card ${isEven ? 'project-card--reverse' : ''}">
+                    <div class="project-text">
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <h3 class="project-title">${project.name}</h3>
+                        <div class="project-desc text-secondary project-desc--short">
+                            ${paraHtml}
+                        </div>
+                    </div>
                     <div class="project-video">
-                        <iframe 
-                            src="${project.videoUrl}" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        <iframe
+                            src="${project.videoUrl}"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <div class="project-body">
-                            <div class="project-tags">
-                                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
-                            <h3 class="project-title">${project.name}</h3>
-                            <p class="project-desc text-secondary">
-                                ${Array.isArray(project.description) 
-                                    ? project.description.join('<br><br>') 
-                                    : project.description
-                                }
-                            </p>
-                        </div>
-                    </div>
-                `).join('')}
+                    <div class="project-desc text-secondary project-desc--overflow"></div>
+                </div>`;
+            }).join('')}
         </div>
     `;
+
+    // After render: if text column is taller than video, move overflow paragraphs to bottom row
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.project-card').forEach(card => {
+            const textCol   = card.querySelector('.project-text');
+            const videoCol  = card.querySelector('.project-video');
+            const shortDesc = card.querySelector('.project-desc--short');
+            const overflow  = card.querySelector('.project-desc--overflow');
+            const paras     = Array.from(shortDesc.querySelectorAll('.proj-para'));
+
+            if (paras.length <= 1) return; // nothing to spill
+
+            // Binary-search: find how many paragraphs keep textCol <= videoCol height
+            // Start by moving all extra paras to overflow, then add back one by one
+            overflow.innerHTML = '';
+            paras.forEach(p => shortDesc.appendChild(p)); // ensure all in short first
+
+            // Move paragraphs to overflow until text height <= video height + small buffer
+            for (let i = paras.length - 1; i >= 1; i--) {
+                const textH  = textCol.offsetHeight;
+                const videoH = videoCol.offsetHeight;
+                if (textH <= videoH + 8) break;
+                // Move last paragraph in shortDesc to front of overflow
+                overflow.insertBefore(paras[i], overflow.firstChild);
+            }
+
+            if (overflow.children.length > 0) {
+                overflow.style.display = 'block';
+            }
+        });
+    });
 };
 
 // Render Experience section
@@ -258,6 +301,7 @@ const init = () => {
     renderExperience();
     renderProjects();
     renderContact();
+    initScrollSpy();
 };
 
 // Run on page load

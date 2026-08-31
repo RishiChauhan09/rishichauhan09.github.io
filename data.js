@@ -85,7 +85,7 @@ const portfolioData = {
         name: "LinkIt",
         description: [
           "<a href = 'https://rishi-chauhan-0009.itch.io/linkit' target='_blank'>LinkIt</a> is a casual connect puzzle game inspired by match-3 mechanics, focused on clear rules, smooth interactions, and satisfying feedback.",
-          "I built the game in Unity using C#, handling core gameplay programming and system implementation. This included grid management, connection logic, match detection, and scoring systems.",
+          "I built the game in Unity using C#, handling core gameplay programming and system implementation.",
           "I also focused on responsiveness and polish, optimizing input handling and update loops to ensure smooth gameplay even during complex chain reactions.",
           "Implemented a unified input system supporting both mobile (touch) and PC (keyboard) controls.",
           "This project helped me deepen my understanding of grid-based gameplay systems, algorithmic problem-solving, and writing maintainable gameplay code in Unity."
