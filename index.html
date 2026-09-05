@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
+
     <!-- Fixed Header -->
     <header class="header">
         <div class="header-content">
@@ -20,20 +21,34 @@
             </div>
 
             <!-- Center: Navigation -->
-            <nav class="nav" id="nav"></nav>
+            <nav class="nav" id="nav" aria-label="Main navigation"></nav>
+
+            <!-- Right: Quick links -->
+            <div class="header-links" id="header-links"></div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- About Section -->
-        <section id="about" class="section active">
+
+        <!-- About / Hero Section -->
+        <section id="about" class="section">
             <div class="section-container"></div>
         </section>
 
+        <!-- Featured Project Section -->
+        <section id="featured" class="section section--featured">
+            <div class="section-container section-container--wide"></div>
+        </section>
+
+        <!-- More Projects Section -->
+        <section id="projects" class="section section--projects">
+            <div class="section-container section-container--wide"></div>
+        </section>
+
         <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="section-container"></div>
+        <section id="skills" class="section section--skills">
+            <div class="section-container section-container--wide"></div>
         </section>
 
         <!-- Experience Section -->
@@ -41,16 +56,15 @@
             <div class="section-container"></div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="section-container projects-container"></div>
-        </section>
-
         <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="section-container"></div>
         </section>
+
     </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
 
     <script src="data.js"></script>
     <script src="script.js" defer></script>

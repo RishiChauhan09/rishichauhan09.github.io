@@ -4,13 +4,43 @@ const portfolioData = {
     name: "Rishi Chauhan",
     title: "Unity Game Developer"
   },
-  navigation: [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "projects", label: "Projects" },
-    { id: "contact", label: "Contact" }
+  headerLinks: [
+    { label: "GitHub",  href: "https://github.com/RishiChauhan09",                      external: true  },
+    { label: "LinkedIn",href: "https://www.linkedin.com/in/rishi-chauhan-a5732635b",     external: true  },
+    { label: "Resume",  href: "OtherFiles/RishiResume.pdf", download: "Rishi_Chauhan_Resume.pdf" }
   ],
+  navigation: [
+    { id: "about",    label: "About"      },
+    { id: "featured", label: "Projects"   },
+    { id: "skills",   label: "Skills"     },
+    { id: "experience",label: "Experience"},
+    { id: "contact",  label: "Contact"    }
+  ],
+  featuredProject: {
+    badge: "Featured Project",
+    id: 1,
+    name: "Arrow Flux",
+    tagline: "A grid-based mobile puzzle game — published on Google Play.",
+    type: "Mobile Puzzle Game",
+    platform: "Android",
+    genre: "Puzzle · Hyper Casual",
+    status: "Published",
+    tech: ["Unity", "C#", "Firebase", "AdMob", "Unity IAP"],
+    whatIBuilt: [
+      "Grid-based gameplay & directional arrow system",
+      "Custom Unity Editor tools — 300+ levels generated with one click",
+      "Level progression, difficulty curve & power-up systems",
+      "Firebase analytics & remote config integration",
+      "AdMob rewarded/interstitial ad pipeline",
+      "Unity IAP in-app purchase flow",
+      "Mobile performance optimization & memory management",
+      "UI animations, transitions & screen feedback"
+    ],
+    challenge: "Keeping level creation and gameplay systems scalable as the game grew past 300 levels without slowing down the team.",
+    solution: "Built custom Unity Editor tooling that automated level generation and validation, reducing level creation time to a single click while enforcing design constraints automatically.",
+    videoUrl: "https://www.youtube.com/embed/__HjNVukScE",
+    playUrl: "https://play.google.com/store/apps/details?id=com.gappedgames.arrowescape"
+  },
   about: {
     badge: "About Me",
     heading: {
@@ -26,7 +56,8 @@ const portfolioData = {
     resumeButton: "Download Resume",
     resumePath: "OtherFiles/RishiResume.pdf",
     githubButton: "View GitHub",
-    githubUrl: "https://github.com/RishiChauhan09"
+    githubUrl: "https://github.com/RishiChauhan09",
+    viewProjectsCta: "View Projects"
   },
   skills: {
     badge: "Expertise",
@@ -54,9 +85,9 @@ const portfolioData = {
     ]
   },
   projects: {
-    badge: "Portfolio",
+    badge: "More Projects",
     heading: {
-      line1: "Featured",
+      line1: "More",
       line2: "Projects"
     },
     items: [
@@ -195,6 +226,16 @@ const portfolioData = {
         value: "linkedin.com/in/rishichauhan",
         href: "https://www.linkedin.com/in/rishi-chauhan-a5732635b"
       }
+    ]
+  },
+  footer: {
+    name: "Rishi Chauhan",
+    role: "Unity Game Developer",
+    year: "2026",
+    links: [
+      { label: "GitHub",   href: "https://github.com/RishiChauhan09",                  external: true  },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/rishi-chauhan-a5732635b",external: true  },
+      { label: "Resume",   href: "OtherFiles/RishiResume.pdf", download: "Rishi_Chauhan_Resume.pdf" }
     ]
   }
 };
