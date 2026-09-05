@@ -15,8 +15,9 @@ const portfolioData = {
     badge: "About Me",
     heading: {
       line1: "Rishi Chauhan",
-      line2: "Game Programmer Portfolio"
+      line2: "Unity Game Developer"
     },
+    tagline: "C# · Unity · 2D / 3D · Gameplay Systems · Optimization",
     image: "OtherFiles/MyImage.png",
     paragraphs: [
       "I'm a Unity Game Developer specializing in C# and gameplay programming, with hands-on experience developing and polishing multiple games from concept to completion. One of my games, Arrow Flux, is published on the Google Play Store.",
@@ -40,7 +41,7 @@ const portfolioData = {
       "SOLID Principles",
       "Design Patterns (FSMs, Observer, Builder)",
       "Performance Optimization",
-      "Porfiling",
+      "Profiling",
       "Frame Debugger",
       "Unity Editor Tools",
       "UI Toolkit",
@@ -60,6 +61,17 @@ const portfolioData = {
       {
         id: 1,
         name: "Arrow Flux",
+        type: "Mobile Puzzle Game",
+        platform: "Android (Google Play)",
+        tech: ["Unity", "C#", "Firebase", "AdMob", "Unity IAP"],
+        systems: [
+          "Grid-based gameplay & arrow system",
+          "Custom Unity Editor tools (300+ levels, one click)",
+          "Level progression & power-up systems",
+          "Modular, scalable architecture",
+          "Mobile performance optimization",
+          "UI animations & interactions"
+        ],
         description: [
           "<a href='https://play.google.com/store/apps/details?id=com.gappedgames.arrowescape' target='_blank'>Arrow Flux</a> is a casual puzzle game where players strategically clear directional arrows from a grid while solving progressively challenging levels.",
           "I developed the project in Unity using C#, handling gameplay programming, system architecture, level systems, UI, and overall game polish.",
@@ -73,6 +85,17 @@ const portfolioData = {
       {
         id: 2,
         name: "City Cafe",
+        type: "Casual Simulation Game",
+        platform: "PC (itch.io)",
+        tech: ["Unity", "C#"],
+        systems: [
+          "Customer flow with finite state machines",
+          "Upgrade & progression systems",
+          "Event-driven, decoupled architecture",
+          "Optimized update loops",
+          "Modular component design",
+          "UI interactions & feedback"
+        ],
         description: [
           "<a href = 'https://rishi-chauhan-0009.itch.io/city-cafe' target='_blank'>City Cafe</a> is a casual simulation game where players manage and grow a café through upgrades, progression, and customer interactions.",
           "I developed the project in Unity using C#, handling gameplay programming, system architecture, and overall polish.",
@@ -86,6 +109,16 @@ const portfolioData = {
       {
         id: 3,
         name: "LinkIt",
+        type: "Connect Puzzle Game",
+        platform: "PC & Mobile (itch.io)",
+        tech: ["Unity", "C#"],
+        systems: [
+          "Grid-based connect & chain reaction logic",
+          "Unified input system (touch & keyboard)",
+          "Optimized input handling & update loops",
+          "Algorithmic chain-reaction resolution",
+          "Smooth animations & player feedback"
+        ],
         description: [
           "<a href = 'https://rishi-chauhan-0009.itch.io/linkit' target='_blank'>LinkIt</a> is a casual connect puzzle game inspired by match-3 mechanics, focused on clear rules, smooth interactions, and satisfying feedback.",
           "I built the game in Unity using C#, handling core gameplay programming and system implementation.",
@@ -99,6 +132,16 @@ const portfolioData = {
       {
         id: 4,
         name: "Echo Run",
+        type: "Maze Puzzle Game",
+        platform: "PC & Mobile (itch.io)",
+        tech: ["Unity", "C#"],
+        systems: [
+          "Reset-based gameplay logic",
+          "Player state management",
+          "Maze navigation system",
+          "Unified input system (touch & keyboard)",
+          "Performance-conscious programming"
+        ],
         description: [
           "<a href='https://rishi-chauhan-0009.itch.io/echo-run' target='_blank'>Echo Run</a> is a fast-paced maze puzzle game where the player must reach a portal within a limited number of resets.",
           "I developed the game in Unity using C#, focusing on gameplay programming and system implementation. Core systems include reset-based gameplay logic, player state management, maze navigation etc.",

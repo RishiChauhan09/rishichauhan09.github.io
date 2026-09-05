@@ -80,15 +80,14 @@ const initScrollSpy = () => {
 const renderAbout = () => {
     const { about } = portfolioData;
     const container = document.querySelector('#about .section-container');
-    
+
     container.innerHTML = `
-        <div class="about-content">
+        <div class="about-content reveal">
             <div class="about-left">
                 <span class="badge">${about.badge}</span>
-                <h2 class="section-heading">
-                    ${about.heading.line1}<br>
-                    <span class="text-accent">${about.heading.line2}</span>
-                </h2>
+                <h1 class="about-name">${about.heading.line1}</h1>
+                <p class="about-role"><span class="text-accent">${about.heading.line2}</span></p>
+                <p class="about-tagline">${about.tagline}</p>
                 <div class="about-paragraphs text-muted">
                     ${about.paragraphs.map(p => `<p>${p}</p>`).join('')}
                 </div>
@@ -127,8 +126,8 @@ const renderSkills = () => {
             ${skills.heading.line1} <span class="text-accent">${skills.heading.line2}</span>
         </h2>
         <ul class="skills-list">
-            ${skills.items.map(skill => `
-                <li class="skill-item">${skill}</li>
+            ${skills.items.map((skill, i) => `
+                <li class="skill-item reveal" style="--reveal-delay:${i * 40}ms">${skill}</li>
             `).join('')}
         </ul>
     `;
@@ -148,23 +147,31 @@ const renderProjects = () => {
             ${projects.items.map((project, index) => {
                 const isEven = index % 2 === 1;
                 const paragraphs = Array.isArray(project.description)
-                    ? project.description
-                    : [project.description];
-
-                // First paragraph always goes in the text column alongside the video.
-                // Remaining paragraphs start in the text column too; JS will move
-                // excess ones to the overflow row after render if they overflow the video height.
+                    ? project.description : [project.description];
                 const paraHtml = paragraphs.map((p, i) =>
                     `<p class="proj-para" data-idx="${i}">${p}</p>`
                 ).join('');
 
+                const techHtml = (project.tech || project.tags).map(t =>
+                    `<span class="project-tech-pill">${t}</span>`
+                ).join('');
+
+                const systemsHtml = project.systems
+                    ? `<ul class="project-systems">
+                        ${project.systems.map(s => `<li>${s}</li>`).join('')}
+                       </ul>`
+                    : '';
+
                 return `
-                <div class="project-card ${isEven ? 'project-card--reverse' : ''}">
+                <div class="project-card reveal" style="--reveal-delay:${index * 80}ms" ${isEven ? 'data-reverse="true"' : ''}>
                     <div class="project-text">
-                        <div class="project-tags">
-                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        <div class="project-meta-row">
+                            <span class="project-type">${project.type || ''}</span>
+                            <span class="project-platform">${project.platform || ''}</span>
                         </div>
                         <h3 class="project-title">${project.name}</h3>
+                        <div class="project-tech-strip">${techHtml}</div>
+                        ${systemsHtml}
                         <div class="project-desc text-secondary project-desc--short">
                             ${paraHtml}
                         </div>
@@ -174,7 +181,8 @@ const renderProjects = () => {
                             src="${project.videoUrl}"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen>
+                            allowfullscreen
+                            loading="lazy">
                         </iframe>
                     </div>
                     <div class="project-desc text-secondary project-desc--overflow"></div>
@@ -183,7 +191,12 @@ const renderProjects = () => {
         </div>
     `;
 
-    // After render: if text column is taller than video, move overflow paragraphs to bottom row
+    // Apply layout class after render (avoids interpolating data-reverse in grid CSS)
+    document.querySelectorAll('.project-card[data-reverse="true"]').forEach(card => {
+        card.classList.add('project-card--reverse');
+    });
+
+    // Overflow paragraph logic — move excess paragraphs to full-width bottom row
     requestAnimationFrame(() => {
         document.querySelectorAll('.project-card').forEach(card => {
             const textCol   = card.querySelector('.project-text');
@@ -192,25 +205,17 @@ const renderProjects = () => {
             const overflow  = card.querySelector('.project-desc--overflow');
             const paras     = Array.from(shortDesc.querySelectorAll('.proj-para'));
 
-            if (paras.length <= 1) return; // nothing to spill
+            if (paras.length <= 1) return;
 
-            // Binary-search: find how many paragraphs keep textCol <= videoCol height
-            // Start by moving all extra paras to overflow, then add back one by one
             overflow.innerHTML = '';
-            paras.forEach(p => shortDesc.appendChild(p)); // ensure all in short first
+            paras.forEach(p => shortDesc.appendChild(p));
 
-            // Move paragraphs to overflow until text height <= video height + small buffer
             for (let i = paras.length - 1; i >= 1; i--) {
-                const textH  = textCol.offsetHeight;
-                const videoH = videoCol.offsetHeight;
-                if (textH <= videoH + 8) break;
-                // Move last paragraph in shortDesc to front of overflow
+                if (textCol.offsetHeight <= videoCol.offsetHeight + 8) break;
                 overflow.insertBefore(paras[i], overflow.firstChild);
             }
 
-            if (overflow.children.length > 0) {
-                overflow.style.display = 'block';
-            }
+            if (overflow.children.length > 0) overflow.style.display = 'block';
         });
     });
 };
@@ -227,7 +232,7 @@ const renderExperience = () => {
         </h2>
         <div class="experience-list">
             ${experience.items.map(item => `
-                <div class="experience-card">
+                <div class="experience-card reveal">
                     <div class="experience-header">
                         <div class="experience-header-left">
                             <h3 class="experience-company">${item.company}</h3>
@@ -274,7 +279,7 @@ const renderContact = () => {
         <p class="contact-subtext text-muted">${contact.subtext}</p>
         <div class="contact-cards">
             ${contact.links.map(link => `
-                <a href="${link.href}" class="contact-card" ${link.type === 'linkedin' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+                <a href="${link.href}" class="contact-card reveal" ${link.type === 'linkedin' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
                     <div class="contact-icon-container ${link.type}-icon-bg">
                         ${getIcon(link.type)}
                     </div>
@@ -291,6 +296,27 @@ const renderContact = () => {
     `;
 };
 
+// Scroll-reveal: fade + slide up when elements enter the viewport
+const initScrollReveal = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                // Apply per-element delay if set via inline custom property
+                const delay = el.style.getPropertyValue('--reveal-delay');
+                if (delay) el.style.transitionDelay = delay;
+                el.classList.add('visible');
+                observer.unobserve(el);
+            }
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+};
+
 // Initialize app
 const init = () => {
     initDarkMode();
@@ -302,6 +328,7 @@ const init = () => {
     renderProjects();
     renderContact();
     initScrollSpy();
+    initScrollReveal();
 };
 
 // Run on page load
