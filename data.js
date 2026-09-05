@@ -44,7 +44,10 @@ const portfolioData = {
       "Frame Debugger",
       "Unity Editor Tools",
       "UI Toolkit",
-      "And other 3rd party packages (Unity IAP, Firebase, AdMob, Google Play Games Services)"
+      "Unity IAP",
+      "Firebase",
+      "AdMob",
+      "Google Play Games Services"
     ]
   },
   projects: {
