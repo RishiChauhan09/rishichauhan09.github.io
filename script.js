@@ -1,34 +1,9 @@
-// Initialize dark mode from localStorage
+// Always dark — no theme toggle
 const initDarkMode = () => {
-    const darkMode = localStorage.getItem('darkMode');
-    if (darkMode === 'false') {
-        document.body.classList.remove('dark-mode');
-        document.body.classList.add('light-mode');
-        document.getElementById('theme-text').textContent = '🌙 Dark Mode';
-    } else {
-        document.body.classList.add('dark-mode');
-        document.body.classList.remove('light-mode');
-        document.getElementById('theme-text').textContent = '☀️ Light Mode';
-        localStorage.setItem('darkMode', 'true');
-    }
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+    localStorage.removeItem('darkMode');
 };
-
-// Theme toggle handler
-document.getElementById('theme-toggle').addEventListener('click', () => {
-    const isDark = document.body.classList.contains('dark-mode');
-    
-    if (isDark) {
-        document.body.classList.remove('dark-mode');
-        document.body.classList.add('light-mode');
-        document.getElementById('theme-text').textContent = '🌙 Dark Mode';
-        localStorage.setItem('darkMode', 'false');
-    } else {
-        document.body.classList.remove('light-mode');
-        document.body.classList.add('dark-mode');
-        document.getElementById('theme-text').textContent = '☀️ Light Mode';
-        localStorage.setItem('darkMode', 'true');
-    }
-});
 
 // Render header profile
 const renderProfile = () => {
@@ -119,17 +94,27 @@ const renderAbout = () => {
 const renderSkills = () => {
     const { skills } = portfolioData;
     const container = document.querySelector('#skills .section-container');
-    
+
+    let delay = 0;
+    const groupsHtml = skills.groups.map(group => {
+        const itemsHtml = group.items.map(skill => {
+            const d = delay;
+            delay += 40;
+            return `<li class="skill-item reveal" style="--reveal-delay:${d}ms">${skill}</li>`;
+        }).join('');
+        return `
+            <div class="skill-group reveal" style="--reveal-delay:${delay - group.items.length * 40}ms">
+                <h3 class="skill-group-label">${group.label}</h3>
+                <ul class="skills-list">${itemsHtml}</ul>
+            </div>`;
+    }).join('');
+
     container.innerHTML = `
-        <span class="badge">${skills.badge}</span>
-        <h2 class="section-heading">
+        <span class="badge reveal" style="--reveal-delay:0ms">${skills.badge}</span>
+        <h2 class="section-heading reveal" style="--reveal-delay:60ms">
             ${skills.heading.line1} <span class="text-accent">${skills.heading.line2}</span>
         </h2>
-        <ul class="skills-list">
-            ${skills.items.map((skill, i) => `
-                <li class="skill-item reveal" style="--reveal-delay:${i * 40}ms">${skill}</li>
-            `).join('')}
-        </ul>
+        <div class="skills-groups">${groupsHtml}</div>
     `;
 };
 
@@ -139,8 +124,8 @@ const renderProjects = () => {
     const container = document.querySelector('#projects .section-container');
 
     container.innerHTML = `
-        <span class="badge">${projects.badge}</span>
-        <h2 class="section-heading">
+        <span class="badge reveal" style="--reveal-delay:0ms">${projects.badge}</span>
+        <h2 class="section-heading reveal" style="--reveal-delay:60ms">
             ${projects.heading.line1} <span class="text-accent">${projects.heading.line2}</span>
         </h2>
         <div class="projects-list">
@@ -226,8 +211,8 @@ const renderExperience = () => {
     const container = document.querySelector('#experience .section-container');
 
     container.innerHTML = `
-        <span class="badge">${experience.badge}</span>
-        <h2 class="section-heading">
+        <span class="badge reveal" style="--reveal-delay:0ms">${experience.badge}</span>
+        <h2 class="section-heading reveal" style="--reveal-delay:60ms">
             ${experience.heading.line1} <span class="text-accent">${experience.heading.line2}</span>
         </h2>
         <div class="experience-list">
@@ -243,8 +228,8 @@ const renderExperience = () => {
                         </div>
                     </div>
                     <ul class="experience-points">
-                        ${item.points.map(point => `
-                            <li class="experience-point">${point}</li>
+                        ${item.points.map((point, i) => `
+                            <li class="experience-point reveal" style="--reveal-delay:${120 + i * 80}ms">${point}</li>
                         `).join('')}
                     </ul>
                 </div>
@@ -271,12 +256,12 @@ const renderContact = () => {
     };
     
     container.innerHTML = `
-        <span class="badge">${contact.badge}</span>
-        <h2 class="section-heading">
+        <span class="badge reveal" style="--reveal-delay:0ms">${contact.badge}</span>
+        <h2 class="section-heading reveal" style="--reveal-delay:60ms">
             ${contact.heading.line1}<br>
             <span class="text-accent">${contact.heading.line2}</span>
         </h2>
-        <p class="contact-subtext text-muted">${contact.subtext}</p>
+        <p class="contact-subtext text-muted reveal" style="--reveal-delay:120ms">${contact.subtext}</p>
         <div class="contact-cards">
             ${contact.links.map(link => `
                 <a href="${link.href}" class="contact-card reveal" ${link.type === 'linkedin' ? 'target="_blank" rel="noopener noreferrer"' : ''}>

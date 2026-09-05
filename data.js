@@ -34,21 +34,23 @@ const portfolioData = {
       line1: "Skills &",
       line2: "Capabilities"
     },
-    items: [
-      "Unity",
-      "C#, Java, C++, C, Python",
-      "Object Oriented Programming",
-      "SOLID Principles",
-      "Design Patterns (FSMs, Observer, Builder)",
-      "Performance Optimization",
-      "Profiling",
-      "Frame Debugger",
-      "Unity Editor Tools",
-      "UI Toolkit",
-      "Unity IAP",
-      "Firebase",
-      "AdMob",
-      "Google Play Games Services"
+    groups: [
+      {
+        label: "Programming",
+        items: ["Unity", "C#", "Java", "C++", "C", "Python"]
+      },
+      {
+        label: "Game Development",
+        items: ["2D & 3D Development", "Gameplay Systems", "UI Toolkit", "Performance Optimization", "Profiling", "Frame Debugger"]
+      },
+      {
+        label: "Architecture",
+        items: ["Object Oriented Programming", "SOLID Principles", "Design Patterns (FSMs, Observer, Builder)", "Unity Editor Tools"]
+      },
+      {
+        label: "Tools & Services",
+        items: ["Firebase", "AdMob", "Unity IAP", "Google Play Games Services"]
+      }
     ]
   },
   projects: {
