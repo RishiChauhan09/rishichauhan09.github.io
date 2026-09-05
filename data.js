@@ -5,9 +5,9 @@ const portfolioData = {
     title: "Unity Game Developer"
   },
   headerLinks: [
-    { label: "GitHub",  href: "https://github.com/RishiChauhan09",                      external: true  },
-    { label: "LinkedIn",href: "https://www.linkedin.com/in/rishi-chauhan-a5732635b",     external: true  },
-    { label: "Resume",  href: "OtherFiles/RishiResume.pdf", download: "Rishi_Chauhan_Resume.pdf" }
+    { label: "GitHub",      href: "https://github.com/RishiChauhan09",                      external: true  },
+    { label: "💼 LinkedIn", href: "https://www.linkedin.com/in/rishi-chauhan-a5732635b",     external: true  },
+    { label: "📄 Resume",   href: "OtherFiles/RishiResume.pdf", download: "Rishi_Chauhan_Resume.pdf" }
   ],
   navigation: [
     { id: "about",    label: "About"      },
@@ -18,10 +18,8 @@ const portfolioData = {
   ],
   featuredProject: {
     badge: "Featured Project",
-    id: 1,
     name: "Arrow Flux",
     tagline: "A grid-based mobile puzzle game — published on Google Play.",
-    type: "Mobile Puzzle Game",
     platform: "Android",
     genre: "Puzzle · Hyper Casual",
     status: "Published",
@@ -97,23 +95,10 @@ const portfolioData = {
         type: "Mobile Puzzle Game",
         platform: "Android (Google Play)",
         tech: ["Unity", "C#", "Firebase", "AdMob", "Unity IAP"],
-        systems: [
-          "Grid-based gameplay & arrow system",
-          "Custom Unity Editor tools (300+ levels, one click)",
-          "Level progression & power-up systems",
-          "Modular, scalable architecture",
-          "Mobile performance optimization",
-          "UI animations & interactions"
-        ],
-        description: [
-          "<a href='https://play.google.com/store/apps/details?id=com.gappedgames.arrowescape' target='_blank'>Arrow Flux</a> is a casual puzzle game where players strategically clear directional arrows from a grid while solving progressively challenging levels.",
-          "I developed the project in Unity using C#, handling gameplay programming, system architecture, level systems, UI, and overall game polish.",
-          "Key contributions include implementing the core grid and arrow systems, level progression, power-ups, animations, UI interactions, and custom Unity Editor tools for creating and managing levels efficiently. (Around 300+ Levels with just one click)",
-          "One challenge was keeping the level and gameplay systems scalable as the number of levels increased. I addressed this by building modular systems and editor tooling that simplified level creation and reduced repetitive development work.",
-          "This project strengthened my skills in Unity gameplay programming, editor tooling, modular architecture, mobile optimization, grid system logic, and shipping a complete commercial game."
-        ],
+        description: "A strategic casual puzzle game where players clear directional arrows from a grid, built with modular level progression and custom editor tools.",
+        moreInfo: "Features 300+ procedural levels generated with custom Unity editor tools, Firebase analytics, AdMob rewarded ads, and scalable architecture.",
         videoUrl: "https://www.youtube.com/embed/__HjNVukScE",
-        tags: ["Unity", "2D", "Grid System", "Hyper Casual"]
+        link: "https://play.google.com/store/apps/details?id=com.gappedgames.arrowescape"
       },
       {
         id: 2,
@@ -121,23 +106,10 @@ const portfolioData = {
         type: "Casual Simulation Game",
         platform: "PC (itch.io)",
         tech: ["Unity", "C#"],
-        systems: [
-          "Customer flow with finite state machines",
-          "Upgrade & progression systems",
-          "Event-driven, decoupled architecture",
-          "Optimized update loops",
-          "Modular component design",
-          "UI interactions & feedback"
-        ],
-        description: [
-          "<a href = 'https://rishi-chauhan-0009.itch.io/city-cafe' target='_blank'>City Cafe</a> is a casual simulation game where players manage and grow a café through upgrades, progression, and customer interactions.",
-          "I developed the project in Unity using C#, handling gameplay programming, system architecture, and overall polish.",
-          "Key contributions include implementing core gameplay systems such as customer flow (using state machines), upgrades, progression, and UI interactions. I focused on clean, modular code to keep systems scalable and easy to maintain.",
-          "One challenge was preventing gameplay systems from becoming tightly coupled as the project grew. I addressed this by refactoring logic into modular components and using event-driven communication. I also optimized update loops to improve performance and stability.",
-          "This project strengthened my skills in Unity gameplay programming, clean architecture, and shipping a complete, playable game."
-        ],
+        description: "A cozy cafe management simulation featuring finite state machine customer flows, modular progression, and event-driven architecture.",
+        moreInfo: "Includes finite state machine customer simulation, event-driven decoupling, upgrade systems, and optimized frame update loops.",
         videoUrl: "https://www.youtube.com/embed/JXnb3K1rgak",
-        tags: ["Unity", "3D", "Simulation", "Cozy"]
+        link: "https://rishi-chauhan-0009.itch.io/city-cafe"
       },
       {
         id: 3,
@@ -145,22 +117,10 @@ const portfolioData = {
         type: "Connect Puzzle Game",
         platform: "PC & Mobile (itch.io)",
         tech: ["Unity", "C#"],
-        systems: [
-          "Grid-based connect & chain reaction logic",
-          "Unified input system (touch & keyboard)",
-          "Optimized input handling & update loops",
-          "Algorithmic chain-reaction resolution",
-          "Smooth animations & player feedback"
-        ],
-        description: [
-          "<a href = 'https://rishi-chauhan-0009.itch.io/linkit' target='_blank'>LinkIt</a> is a casual connect puzzle game inspired by match-3 mechanics, focused on clear rules, smooth interactions, and satisfying feedback.",
-          "I built the game in Unity using C#, handling core gameplay programming and system implementation.",
-          "I also focused on responsiveness and polish, optimizing input handling and update loops to ensure smooth gameplay even during complex chain reactions.",
-          "Implemented a unified input system supporting both mobile (touch) and PC (keyboard) controls.",
-          "This project helped me deepen my understanding of grid-based gameplay systems, algorithmic problem-solving, and writing maintainable gameplay code in Unity."
-        ],
+        description: "A match-style connect puzzle game built with algorithmic chain reaction resolution, grid mechanics, and unified touch/keyboard controls.",
+        moreInfo: "Implements recursive chain reaction algorithms, unified mobile & PC input handling, and responsive game feel polish.",
         videoUrl: "https://www.youtube.com/embed/1uFTC3YIFz0",
-        tags: ["Unity", "2D", "Grid System", "Match 3 Type"]
+        link: "https://rishi-chauhan-0009.itch.io/linkit"
       },
       {
         id: 4,
@@ -168,21 +128,10 @@ const portfolioData = {
         type: "Maze Puzzle Game",
         platform: "PC & Mobile (itch.io)",
         tech: ["Unity", "C#"],
-        systems: [
-          "Reset-based gameplay logic",
-          "Player state management",
-          "Maze navigation system",
-          "Unified input system (touch & keyboard)",
-          "Performance-conscious programming"
-        ],
-        description: [
-          "<a href='https://rishi-chauhan-0009.itch.io/echo-run' target='_blank'>Echo Run</a> is a fast-paced maze puzzle game where the player must reach a portal within a limited number of resets.",
-          "I developed the game in Unity using C#, focusing on gameplay programming and system implementation. Core systems include reset-based gameplay logic, player state management, maze navigation etc.",
-          "I also implemented a unified input system supporting both mobile (touch) and PC (keyboard) controls.",
-          "This project strengthened my skills in state management, performance-conscious gameplay programming, and designing systems that support speed-focused gameplay."
-        ],
+        description: "A fast-paced maze puzzle game centered around reset-based navigation, tight player state management, and optimized gameplay loops.",
+        moreInfo: "Designed with reset-based maze navigation logic, speedrun state management, and performance-conscious C# gameplay programming.",
         videoUrl: "https://www.youtube.com/embed/r-APjz4nU2M",
-        tags: ["Unity", "2D", "Puzzle", "Fast Paced"]
+        link: "https://rishi-chauhan-0009.itch.io/echo-run"
       }
     ]
   },

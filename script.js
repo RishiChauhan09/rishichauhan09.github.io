@@ -19,11 +19,18 @@ const renderHeaderLinks = () => {
     const el = document.getElementById('header-links');
     if (!el) return;
 
+    const githubSvg = `<svg class="header-btn-icon" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>`;
+
     el.innerHTML = headerLinks.map(link => {
         const attrs = link.external
             ? `target="_blank" rel="noopener noreferrer"`
             : (link.download ? `download="${link.download}"` : '');
-        return `<a href="${link.href}" class="header-link" ${attrs}>${link.label}</a>`;
+        const isGithub = (link.label && link.label.toLowerCase().includes('github')) || (link.href && link.href.includes('github'));
+        const iconHtml = isGithub ? githubSvg : '';
+        const labelText = isGithub ? link.label.replace('🐙', '').trim() : link.label;
+        return `<a href="${link.href}" class="header-link" ${attrs}>${iconHtml}${labelText}</a>`;
     }).join('');
 };
 
@@ -203,17 +210,38 @@ const renderMoreProjects = () => {
                     const techHtml = project.tech.map(t =>
                         `<span class="mp-tech-pill">${t}</span>`
                     ).join('');
-                    const linkHref = project.tags.includes('Android') || project.platform.includes('Google Play')
-                        ? `https://play.google.com/store/apps/details?id=com.gappedgames.arrowescape`
-                        : (project.id === 2 ? 'https://rishi-chauhan-0009.itch.io/city-cafe'
-                          : project.id === 3 ? 'https://rishi-chauhan-0009.itch.io/linkit'
-                          : 'https://rishi-chauhan-0009.itch.io/echo-run');
+                    const linkHref = project.link || project.url || '#';
+                    const descHtml = (project.description || project.shortDesc || project.summary)
+                        ? `<p class="mp-card-desc">${project.description || project.shortDesc || project.summary}</p>`
+                        : '';
+                    const moreInfoHtml = project.moreInfo
+                        ? `<div class="mp-card-more">
+                               <div class="mp-more-label">
+                                   <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                   </svg>
+                                   More Info
+                               </div>
+                               <p class="mp-more-text">${project.moreInfo}</p>
+                               <a href="${linkHref}" target="_blank" rel="noopener noreferrer" class="mp-more-link">
+                                   View Project
+                                   <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                   </svg>
+                               </a>
+                           </div>`
+                        : '';
+
+                    const videoSrc = project.videoUrl.includes('?')
+                        ? `${project.videoUrl}&enablejsapi=1&mute=1&playsinline=1`
+                        : `${project.videoUrl}?enablejsapi=1&mute=1&playsinline=1`;
 
                     return `
                     <div class="mp-card reveal" style="--reveal-delay:${i * 60}ms">
                         <div class="mp-video">
                             <iframe
-                                src="${project.videoUrl}"
+                                src="${videoSrc}"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 referrerpolicy="strict-origin-when-cross-origin"
                                 allowfullscreen
@@ -228,6 +256,7 @@ const renderMoreProjects = () => {
                             </div>
                             <h3 class="mp-card-title">${project.name}</h3>
                             <div class="mp-tech-strip">${techHtml}</div>
+                            ${descHtml}
                             <a href="${linkHref}" target="_blank" rel="noopener noreferrer" class="mp-card-link">
                                 View Project
                                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -236,6 +265,7 @@ const renderMoreProjects = () => {
                                 </svg>
                             </a>
                         </div>
+                        ${moreInfoHtml}
                     </div>`;
                 }).join('')}
             </div>
@@ -263,22 +293,60 @@ const initCarousel = () => {
     btnLeft?.addEventListener('click',  () => track.scrollBy({ left: -scrollBy(), behavior: 'smooth' }));
     btnRight?.addEventListener('click', () => track.scrollBy({ left:  scrollBy(), behavior: 'smooth' }));
 
-    // Drag-to-scroll on desktop
-    let isDown = false, startX = 0, scrollStart = 0;
+    // Smooth drag-to-scroll without snapping
+    let isDown = false, startX = 0, scrollStart = 0, hasDragged = false;
     track.addEventListener('mousedown', e => {
         isDown = true;
+        hasDragged = false;
         track.classList.add('is-dragging');
         startX      = e.pageX - track.offsetLeft;
         scrollStart = track.scrollLeft;
     });
-    track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('is-dragging'); });
-    track.addEventListener('mouseup',    () => { isDown = false; track.classList.remove('is-dragging'); });
+
+    track.addEventListener('mouseleave', () => {
+        if (!isDown) return;
+        isDown = false;
+        track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mouseup', () => {
+        isDown = false;
+        setTimeout(() => track.classList.remove('is-dragging'), 60);
+    });
+
     track.addEventListener('mousemove', e => {
         if (!isDown) return;
         e.preventDefault();
         const x    = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.2;
+        const walk = (x - startX) * 1.3;
+        if (Math.abs(walk) > 4) hasDragged = true;
         track.scrollLeft = scrollStart - walk;
+    });
+
+    // Prevent accidental link clicks if user was dragging
+    track.addEventListener('click', e => {
+        if (hasDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
+
+    // Hover to play YouTube video on card, pause on leave
+    const cards = track.querySelectorAll('.mp-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const iframe = card.querySelector('iframe');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            const iframe = card.querySelector('iframe');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+        });
     });
 
     // Show/hide arrows based on scroll position
@@ -426,7 +494,12 @@ const initScrollReveal = () => {
             if (entry.isIntersecting) {
                 const el    = entry.target;
                 const delay = el.style.getPropertyValue('--reveal-delay');
-                if (delay) el.style.transitionDelay = delay;
+                if (delay) {
+                    el.style.transitionDelay = delay;
+                    setTimeout(() => {
+                        el.style.transitionDelay = '';
+                    }, 600);
+                }
                 el.classList.add('visible');
                 observer.unobserve(el);
             }
